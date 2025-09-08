@@ -1,0 +1,32 @@
+﻿@model List<MyWebApplication.Models.Item>
+@{
+    ViewData["Title"] = "Lista";
+}
+
+<h3>Items</h3>
+
+<a class="btn btn-primary" asp-action="Create">Agregar nuevo</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>$ @item.Price.ToString("N2")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

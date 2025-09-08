@@ -1,0 +1,13 @@
+﻿@model MyWebApplication.Models.Item
+@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<h3>Estas seguro de querer eliminar este item?</h3>
+<p>Nombre: @Model.Name</p>
+<p>Precio: $ @Model.Price.ToString("N2")</p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id"/>
+    <input type="submit" class="btn btn-danger" value="Delete"/>
+</form>
