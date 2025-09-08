@@ -16,5 +16,7 @@ namespace MyWebApplication.Models
         [ForeignKey("CategoryId")]
         public int? CategoryId { get; set; }
         public Category? Category { get; set; } = null!;
+
+        public List<ItemClient>? ItemClients { get; set; }
     }
 }
