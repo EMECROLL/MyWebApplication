@@ -7,7 +7,7 @@ namespace MyWebApplication.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -20,11 +20,17 @@ namespace MyWebApplication.Data
                 new SerialNumber { Id = 1, Name = "SerialNumber1" }
                 );
 
+            modelBuilder.Entity<Category>().HasData(
+                new Category { Id = 1, Name = "Category1" },
+                new Category { Id = 2, Name = "Category2" }
+                );
+
             base.OnModelCreating(modelBuilder);
         }
 
         // Entities
         public DbSet<Item> Items { get; set; }
         public DbSet<SerialNumber> SerialNumbers { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }

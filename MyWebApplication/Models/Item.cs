@@ -12,5 +12,9 @@ namespace MyWebApplication.Models
         [ForeignKey("SerialNumberId")]
         public int? SerialNumberId { get; set; }
         public SerialNumber? SerialNumber { get; set; } = null!;
+
+        [ForeignKey("CategoryId")]
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; } = null!;
     }
 }

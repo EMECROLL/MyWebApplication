@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyWebApplication.Data;
 using MyWebApplication.Models;
@@ -18,17 +19,19 @@ namespace MyWebApplication.Controllers
         {
             var items = await _context.Items
                 .Include(s => s.SerialNumber)
+                .Include(c => c.Category)
                 .ToListAsync();
             return View(items);
         }
 
         public IActionResult Create()
         {
+            ViewData["Categories"] = new SelectList(_context.Categories, "Id", "Name");
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Id, Name, Price")] Item item)
+        public async Task<IActionResult> Create([Bind("Id, Name, Price, CategoryId")] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -41,12 +44,13 @@ namespace MyWebApplication.Controllers
 
         public async Task<IActionResult> Edit(int Id)
         {
+            ViewData["Categories"] = new SelectList(_context.Categories, "Id", "Name");
             var item = await _context.Items.FirstOrDefaultAsync(x => x.Id == Id);
             return View(item);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("Id, Name, Price")] Item item)
+        public async Task<IActionResult> Edit(int id, [Bind("Id, Name, Price, CategoryId")] Item item)
         {
             if(ModelState.IsValid)
             {
